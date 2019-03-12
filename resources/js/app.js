@@ -1,4 +1,3 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -9,25 +8,45 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-
-// const files = require.context('./', true, /\.vue$/i);
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
-
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+Vue.component('movie-card', require('./components/MovieCardComponent.vue').default);
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    data: {
+        newTitle: '',
+        newYear: '',
+        newOverview: '',
+        newImage: '',
+        movies: [{
+                title: 'Ritorno al futuro',
+                year: 1985,
+                overview: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
+                image: 'https://images-na.ssl-images-amazon.com/images/I/71tkp3URReL._SY606_.jpg'
+            },
+            {
+                title: 'Titanic',
+                year: 1997,
+                overview: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
+                image: 'http://www.bolognatoday.it/~shared/images/cinema/locandine/titanic-1hmla0.jpg'
+            },
+            {
+                title: 'Boris',
+                year: 2011,
+                overview: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
+                image: 'https://pad.mymovies.it/filmclub/2010/10/026/locandina.jpg'
+            },
+        ]
+    },
+    methods: {
+        addNewMovie: function() {
+            var newMovieObject = {
+                title: this.newTitle,
+                year: this.newYear,
+                overview: this.newOverview,
+                image: this.newImage
+            };
+
+            this.movies.push(newMovieObject);
+        }
+    }
 });
